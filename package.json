@@ -2,7 +2,7 @@
   "name": "blackstar-cms-client",
   "version": "0.0.1",
   "description": "",
-  "main": "blackstar-cms-client.js",
+  "main": "blackstar.js",
   "directories": {
     "test": "test"
   },
@@ -20,6 +20,7 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "jsdoc-to-markdown": "^1.3.4",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "node-fetch": "^1.5.1"
   }
 }
