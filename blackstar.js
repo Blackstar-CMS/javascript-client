@@ -34,14 +34,14 @@ Client.prototype.getAll = function () {
 };
 /**
  * Query for content chunks. Request can be by ids OR by tags OR by names. 
+ * 
+ * Querying by ids or by names is an OR query. I.e get the chunks with the name 'heading' or 'footer'. Querying by tags is an AND query. I.e. get the chunks with tags 'blackstarpedia' and 'english'.
  * @example
  * client.get({ ids: [1,2,3] });
  * @example
  * client.get({ names: ['heading','footer'] });
  * @example
  * client.get({ tags: ['blackstarpedia','english'] })
- * 
- * Querying by ids or by names is an OR query. I.e get the chunks with the name 'heading' or 'footer'. Querying by tags is an AND query. I.e. get the chunks with tags 'blackstarpedia' and 'english'.
  * @param {object} request - an object specifying the query to perform.  
  * @returns {Array} A collection of chunks.   
  */
@@ -62,23 +62,20 @@ Client.prototype.getAllTags = function () {
  * Update an existing chunk.
  */
 Client.prototype.update = function (chunk) {
-    var headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    return fetch(this.apiUrl + chunk.id, {
-        method: 'POST',
-        body: JSON.stringify(chunk),
-        headers: headers
-    });
+    return post(this.apiUrl + chunk.id, chunk);
 };
 Client.prototype.create = function (chunk) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    return fetch(this.apiUrl.replace(/\/$/g, ''), {
-        method: 'POST',
-        body: JSON.stringify(chunk),
-        headers: myHeaders
-    });
+    return post(this.apiUrl.replace(/\/$/g, ''), chunk);
 };
+function post(url, data) {
+    var headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: headers
+    });
+}
 Client.prototype.enrichCollectionWithByMethods = function(data) { 
     data.byName = function (name) { return data.find(function (item) { return item.name === name; }); };
     data.byId = function (id) { return data.find(function (item) { return item.id === id; }); };
