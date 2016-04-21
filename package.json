@@ -1,15 +1,15 @@
 {
   "name": "blackstar-cms-client",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "JavaScript client for Blackstar CMS",
   "main": "blackstar.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build": "browserify blackstar.js -o blackstar-cms-client.js",
     "test": "mocha test",
-    "docs": "jsdoc2md blackstar.js > api.md"
+    "docs": "jsdoc2md blackstar.js > api.md",
+    "postinstall": "browserify blackstar.js -o blackstar-cms-client.js"
   },
   "author": "Liam McLennan",
   "license": "MIT",
