@@ -91,9 +91,9 @@ describe('javascript client', function() {
   describe('integration', function () {
       var blackstar = null;
       before(function () {
-          blackstar = new Blackstar.Client('http://localhost:2999');
+          blackstar = new Blackstar.Client('http://demo.blackstarcms.net');
       });
-      describe('fetching content', function () {
+      describe('fetching all content', function () {
           it('should return content', function () {
             return blackstar.getAll().then(chunks => {
                 assert.ok(chunks);
@@ -106,8 +106,31 @@ describe('javascript client', function() {
                 assert.ok(chunk);
             }).catch(err => { console.error(err); assert(false, 'Failed calling the API. This test expects the blackstar server to be running on port 2999.');});;
           });
-          
       });
-      
+      describe('fetching by id', ()=> {
+          it('should find the correct content', ()=>{
+              blackstar.get({ids:[29,30]}).then(chunks => {
+                  assert.ok(chunks.byName('main-content'));
+                  assert.ok(chunks.byName('smaller-heading'));
+                  assert.equal(2, chunks.length);
+              });
+          });
+      });
+      describe('fetching by name', ()=> {
+          it('should find the correct content', ()=>{
+              blackstar.get({names:['main-content','smaller-heading']}).then(chunks => {
+                  assert.ok(chunks.byName('main-content'));
+                  assert.ok(chunks.byName('smaller-heading'));
+                  assert.equal(2, chunks.length);
+              });
+          });
+      });
+      describe('fetching by tag', ()=> {
+          it('should find the correct content', ()=>{
+              blackstar.get({tags:['blackstarpedia']}).then(chunks => {
+                  assert.ok(chunks.length > 3);
+              });
+          });
+      });    
   });
 });
