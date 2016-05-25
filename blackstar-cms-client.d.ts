@@ -7,5 +7,6 @@ declare module 'blackstar-cms-client' {
         get(query:any)
         getAll()
         bind(any)
+        delete(id:number)
     }
 }

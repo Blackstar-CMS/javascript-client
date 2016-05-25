@@ -67,13 +67,21 @@ Client.prototype.update = function (chunk) {
 Client.prototype.create = function (chunk) {
     return post(this.apiUrl.replace(/\/$/g, ''), chunk);
 };
+Client.prototype.delete = function (id) {
+    return fetch(this.apiUrl + chunk.id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
 function post(url, data) {
-    var headers = new Headers();
-    headers.append("Content-Type", "application/json");
     return fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: headers
+        headers: {
+            'Content-Type': 'application/json'
+        }
     });
 }
 Client.prototype.enrichCollectionWithByMethods = function(data) { 

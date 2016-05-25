@@ -93,6 +93,22 @@ describe('javascript client', function() {
       before(function () {
           blackstar = new Blackstar.Client('http://demo.blackstarcms.net');
       });
+      describe('deleting an item', function() {
+          it('should delete a created item',function() {
+              // first create our lamb
+              blackstar.create({id:0, tags:['foo-test-tag'], name: 'Chunk to be deleted', value: 'Redundant content'})
+                .then(response => {
+                    if (!response.ok) assert(false, 'create failed ' + JSON.stringify(response));
+                    return response.json();
+                }).then(id => blackstar.get({ids:[id]}))
+                .then(chnk => {
+                    assert(chnk);
+                    return blackstar.delete(chnk.id);
+                }).then(delResp => {
+                        if (!delResp.ok) assert(false, 'delete failed ' + JSON.stringify(delResp)); 
+                });
+          });
+      });
       describe('fetching all content', function () {
           it('should return content', function () {
             return blackstar.getAll().then(chunks => {
