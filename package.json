@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "description": "JavaScript client for Blackstar CMS",
   "main": "blackstar.js",
+  "typings": "./index.d.ts",
   "directories": {
     "test": "test"
   },
