@@ -68,7 +68,7 @@ Client.prototype.create = function (chunk) {
     return post(this.apiUrl.replace(/\/$/g, ''), chunk);
 };
 Client.prototype.delete = function (id) {
-    return fetch(this.apiUrl + chunk.id, {
+    return fetch(this.apiUrl + id, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
