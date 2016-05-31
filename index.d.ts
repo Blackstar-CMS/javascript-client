@@ -8,5 +8,6 @@ declare module 'blackstar-cms-client' {
         getAll()
         bind(any)
         delete(id:number)
+        adminSearch(query:string)
     }
 }

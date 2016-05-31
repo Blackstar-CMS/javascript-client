@@ -84,6 +84,13 @@ function post(url, data) {
         }
     });
 }
+
+Client.prototype.adminSearch = function (query) {
+    return fetch(this.serverUrl + 'api/adminSearch/' + query)
+        .then(function (response) { return response.json(); })
+        .then(this.enrichCollectionWithByMethods);
+};
+
 Client.prototype.enrichCollectionWithByMethods = function(data) { 
     data.byName = function (name) { return data.find(function (item) { return item.name === name; }); };
     data.byId = function (id) { return data.find(function (item) { return item.id === id; }); };
