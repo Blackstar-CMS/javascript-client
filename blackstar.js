@@ -91,6 +91,25 @@ Client.prototype.adminSearch = function (query) {
         .then(this.enrichCollectionWithByMethods);
 };
 
+Client.prototype.mediaSearch = function (query) {
+    return fetch(this.serverUrl + 'api/mediaSearch/' + query)
+        .then(function (response) { return response.json(); });
+};
+
+Client.prototype.createMedia = function (files) {
+  var data = new FormData();
+  for (var i = 0; i<files.length; i++) {
+    let file = files[i];
+    data.append(i.toString() + 'file', file);
+    data.append(i.toString() + 'filename', file.name);
+  }
+  return fetch('/api/media', {
+    method: 'POST',
+    body: data
+  });
+};
+
+
 Client.prototype.enrichCollectionWithByMethods = function(data) { 
     data.byName = function (name) { return data.find(function (item) { return item.name === name; }); };
     data.byId = function (id) { return data.find(function (item) { return item.id === id; }); };
@@ -139,7 +158,7 @@ Client.prototype.bind = function (chunks, selector) {
         var el = !!selector ? selector(chunk) : document.querySelector('[data-blackstar-name="' + chunk.name + '"]');
         if (el) {
             el.setAttribute('data-blackstar-id', chunk.id);
-            el.innerHTML = chunk.html;
+            el.innerHTML = chunk.value;
         }
     });
     this.addEditLinks();
