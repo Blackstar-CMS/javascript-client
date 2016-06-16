@@ -1,6 +1,6 @@
 {
   "name": "blackstar-cms-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "JavaScript client for Blackstar CMS",
   "main": "blackstar.js",
   "typings": "./index.d.ts",
