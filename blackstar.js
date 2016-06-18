@@ -167,7 +167,7 @@ Client.prototype.bind = function (chunks, selector) {
         var el = !!selector ? selector(chunk) : document.querySelector('[data-blackstar-name="' + chunk.name + '"]');
         if (el) {
             el.setAttribute('data-blackstar-id', chunk.id);
-            el.innerHTML = chunk.value;
+            el.innerHTML = chunk.html;
         }
     });
     this.addEditLinks();
