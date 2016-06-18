@@ -9,5 +9,8 @@ declare module 'blackstar-cms-client' {
         bind(any)
         delete(id:number)
         adminSearch(query:string)
+        mediaSearch(query:string)
+        createMedia(media:any)
+        deleteMedia(hash:string)
     }
 }

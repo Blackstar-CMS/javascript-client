@@ -102,13 +102,22 @@ Client.prototype.createMedia = function (files) {
     let file = files[i];
     data.append(i.toString() + 'file', file);
     data.append(i.toString() + 'filename', file.name);
+    data.append(i.toString() + 'type', file.type);
   }
-  return fetch('/api/media', {
+  return fetch(this.serverUrl + 'api/media', {
     method: 'POST',
     body: data
   });
 };
 
+Client.prototype.deleteMedia = function (hash) {
+    return fetch(this.serverUrl + 'api/media/' + hash, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
 
 Client.prototype.enrichCollectionWithByMethods = function(data) { 
     data.byName = function (name) { return data.find(function (item) { return item.name === name; }); };
