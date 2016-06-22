@@ -251,7 +251,19 @@ if (typeof module === 'object' && typeof module.exports === 'object') {
 }
 
 if (typeof window === 'object') {
-    window.Blackstar = toExport;   
+  window.Blackstar = toExport;   
+  // register an error logger
+  window.onerror = function (message, file, line, col, error) {
+    try {
+      post('/api/throw', {
+        file,
+        line,
+        col,
+        message,
+        stack: error.stack,
+        context: navigator.userAgent
+      }).catch(e => {console.error(e);});
+    } catch (e) {}
+  };
 }
-
 
