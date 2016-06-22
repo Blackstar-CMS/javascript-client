@@ -91,8 +91,8 @@ describe('javascript client', function () {
     describe('integration', function () {
         var blackstar = null;
         before(function () {
-              blackstar = new Blackstar.Client('http://demo.blackstarcms.net');
-            // blackstar = new Blackstar.Client('http://localhost:2999');
+            //blackstar = new Blackstar.Client('http://demo.blackstarcms.net');
+            blackstar = new Blackstar.Client('http://localhost:2999');
         });
 
         describe('create, edit, delete', function () {
@@ -100,7 +100,7 @@ describe('javascript client', function () {
             var chunkId = null;
 
             before(function () {
-                return blackstar.create({ id: 0, tags: ['foo-test-tag'], name: 'DELETE ME', value: initialValue })
+                return blackstar.create({ id: 0, tags: ['foo-test-tag'], name: 'DELETE ME', value: initialValue, html:'' })
                     .then(response => {
                         if (!response.ok) {
                             return response.text().then(j => { throw new Error(j); });
