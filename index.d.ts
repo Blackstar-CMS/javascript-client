@@ -1,6 +1,12 @@
 declare module 'blackstar-cms-client' {
+    export interface Options {
+        showEditControls: boolean,
+        token: string,
+        authCallback: (response:any) => void
+    }
+
     export class Client {
-        constructor(url:string, options?:any)
+        constructor(url:string, options?:Options)
         create(chunk:any)
         update(chunk:any)
         getAllTags()
