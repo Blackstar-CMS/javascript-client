@@ -33,12 +33,19 @@ A Blackstar CMS client.
 | Param | Type | Description |
 | --- | --- | --- |
 | url | <code>string</code> | the url of the blackstar server. E.g. http://localhost:2999 |
-| options | <code>object</code> | an options object with type `{ showEditControls: boolean }` |
+| options | <code>object</code> | an options object with type `{ showEditControls: boolean, token: string, authCallback: Response -> void }` |
 
+**Example**  
+```js
+var blackstar = new Client('https://localhost:2999', { token: '9f7sd9f7sf...', 
+authCallback: function (response) {
+    // response is HTTP 401 unauthorized. 
+});  
+```
 <a name="module_Blackstar..Client+get"></a>
 
 #### client.get(request) ⇒ <code>Array</code>
-Query for content chunks. Request can be by ids OR by tags OR by names.
+Query for content chunks. Request can be by ids OR by tags OR by names. Querying by ids or by names is an OR query. I.e get the chunks with the name 'heading' or 'footer'. Querying by tags is an AND query. I.e. get the chunks with tags 'blackstarpedia' and 'english'.
 
 **Kind**: instance method of <code>[Client](#module_Blackstar..Client)</code>  
 **Returns**: <code>Array</code> - A collection of chunks.  
@@ -57,7 +64,7 @@ client.get({ names: ['heading','footer'] });
 ```
 **Example**  
 ```js
-client.get({ tags: ['blackstarpedia','english'] })Querying by ids or by names is an OR query. I.e get the chunks with the name 'heading' or 'footer'. Querying by tags is an AND query. I.e. get the chunks with tags 'blackstarpedia' and 'english'.
+client.get({ tags: ['blackstarpedia','english'] })
 ```
 <a name="module_Blackstar..Client+urlFor"></a>
 

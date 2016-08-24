@@ -12,7 +12,12 @@ require('whatwg-fetch');
 * A Blackstar CMS client.
 * @constructor
 * @param {string} url - the url of the blackstar server. E.g. http://localhost:2999
-* @param {object} options - an options object with type `{ showEditControls: boolean, token: string }` 
+* @param {object} options - an options object with type `{ showEditControls: boolean, token: string, authCallback: Response -> void }`
+* @example
+* var blackstar = new Client('https://localhost:2999', { token: '9f7sd9f7sf...', 
+authCallback: function (response) {
+    // response is HTTP 401 unauthorized. 
+});  
 */
 function Client(url, options) {
     this.serverUrl = url + (endsWithForwardSlash(url) ? '' : '/');
